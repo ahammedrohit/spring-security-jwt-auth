@@ -1,11 +1,13 @@
 package com.kwaski.auth.service.auth;
 
+import com.kwaski.auth.entity.TokenEntity;
 import com.kwaski.auth.entity.UserEntity;
 import com.kwaski.auth.entity.auth.AuthenticationRequest;
 import com.kwaski.auth.entity.auth.AuthenticationResponse;
 import com.kwaski.auth.entity.auth.RegisterRequest;
 import com.kwaski.auth.enums.Role;
-import com.kwaski.auth.service.JwtService;
+import com.kwaski.auth.repository.postgres.TokenRepository;
+import com.kwaski.auth.service.TokenService;
 import com.kwaski.auth.service.UserService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,8 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    private final TokenService tokenService;
+
 
     public AuthenticationResponse register(RegisterRequest request) {
         UserEntity user = new UserEntity();
@@ -32,12 +36,15 @@ public class AuthenticationService {
         user.setRole(Role.USER);
         userService.createUser(user);
         var jwtToken = jwtService.generateToken(user);
+        tokenService.saveToken(TokenEntity.builder()
+                .user_name(user.getUser_name())
+                .accessToken(jwtToken)
+                .build());
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .name(user.getUser_name())
                 .role(String.valueOf(user.getRole()))
                 .build();
-
     }
 
     public AuthenticationResponse authenticate(@NonNull AuthenticationRequest request) {

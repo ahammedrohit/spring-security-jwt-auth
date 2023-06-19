@@ -26,4 +26,4 @@ CREATE  TABLE "public".users (
 
 
 
-CREATE TRIGGER update_updated_at_workers BEFORE UPDATE ON "public".users FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+CREATE TRIGGER update_updated_at_users BEFORE UPDATE ON "public".users FOR EACH ROW EXECUTE FUNCTION update_updated_at();
