@@ -1,0 +1,28 @@
+spring:
+  sql:
+    init:
+      mode: always
+  datasource:
+    postgres:
+      hikari:
+        jdbc-url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/testdb?currentSchema=public}
+        username: ${POSTGRES_USERNAME:postgres}
+        password: ${POSTGRES_PASSWORD:admin}
+        driver-class-name: org.postgresql.Driver
+        auto-commit: false
+        minimum-idle: 10
+        maximum-pool-size: 10
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+server:
+  port: ${PORT:8080}
+flyway:
+  baselineOnMigrate: true
+  url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/testdb?currentSchema=public}
+  username: ${POSTGRES_USERNAME:postgres}
+  password: ${POSTGRES_PASSWORD:admin}
+  driver-class-name: org.postgresql.Driver
+
+
+
