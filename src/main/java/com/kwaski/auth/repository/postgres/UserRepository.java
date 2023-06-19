@@ -11,4 +11,6 @@ public interface UserRepository {
     List<UserEntity> getAllUsers();
 
     boolean createUser(UserEntity user);
+
+    UserEntity getUserByUsername(String user_name);
 }

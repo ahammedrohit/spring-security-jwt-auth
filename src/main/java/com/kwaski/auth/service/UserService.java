@@ -17,8 +17,12 @@ public class UserService {
         return userRepository.getAllUsers();
     }
 
+    public UserEntity getUserByUsername(String username) {
+        return userRepository.getUserByUsername(username);
+    }
+
+
     public boolean createUser(UserEntity user) {
-//        System.out.println(user);
         return userRepository.createUser(user);
     }
 }

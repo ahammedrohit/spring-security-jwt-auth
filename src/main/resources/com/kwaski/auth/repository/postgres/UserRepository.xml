@@ -7,10 +7,13 @@
     <select id="getAllUsers" resultType="com.kwaski.auth.entity.UserEntity">
         SELECT * from users;
     </select>
+    <select id="getUserByUsername" resultType="com.kwaski.auth.entity.UserEntity">
+        SELECT * from users WHERE user_name = #{user_name};
+    </select>
 
     <insert id="createUser" parameterType="com.kwaski.auth.entity.UserEntity">
-        INSERT INTO users(user_name, email, password)
-        VALUES (#{user_name}, #{email}, #{password})
+        INSERT INTO users(user_name, email, password,role)
+        VALUES (#{user_name}, #{email}, #{password}, #{role})
     </insert>
 
 </mapper>

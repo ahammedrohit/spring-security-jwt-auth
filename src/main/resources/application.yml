@@ -23,6 +23,10 @@ flyway:
   username: ${POSTGRES_USERNAME:postgres}
   password: ${POSTGRES_PASSWORD:admin}
   driver-class-name: org.postgresql.Driver
+jwt:
+  accessToken:
+    signInKey : 8Zz5tw0Ionm3XPZZfN0NOml3z9FMfmpgXwovR9fp6ryDIoGRM8EPHAB6iHsc0fb
+
 
 
 

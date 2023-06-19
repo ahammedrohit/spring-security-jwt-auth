@@ -16,6 +16,7 @@ CREATE  TABLE "public".users (
 	user_name          varchar(255)    ,
 	email         varchar(255)    ,
 	password         varchar(255)    ,
+	role        varchar(255)    ,
 	created_at           timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
 	updated_at           timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
 	CONSTRAINT users_pkey PRIMARY KEY ( user_id )
