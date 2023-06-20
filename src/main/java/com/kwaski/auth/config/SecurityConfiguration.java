@@ -29,7 +29,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
                             try {
                                 authorizationManagerRequestMatcherRegistry
-//                                        .requestMatchers("/api/**").permitAll()
+//                                        .requestMatchers("/api/v1/hello").permitAll()
                                         .requestMatchers("/api/v1/auth/**").permitAll()
                                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
                                         .anyRequest()
