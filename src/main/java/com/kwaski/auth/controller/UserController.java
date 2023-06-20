@@ -17,10 +17,10 @@ public class UserController {
         return userService.getAllUsers().toString();
     }
 
-    @PostMapping("/signup")
-    public String signup(@RequestBody UserEntity user) {
-//        System.out.println(user);
-        userService.createUser(user);
-        return "Hello, " + user.getUser_name();
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello";
     }
+
+
 }

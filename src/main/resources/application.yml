@@ -26,7 +26,9 @@ flyway:
 jwt:
   accessToken:
     signInKey : 8Zz5tw0Ionm3XPZZfN0NOml3z9FMfmpgXwovR9fp6ryDIoGRM8EPHAB6iHsc0fb
-    accessTokenExpirationTime : 36000000 # 10 hour
+#    accessTokenExpirationTimeMs : 86400000 # 1 day
+    accessTokenExpirationTimeMs : 20000
+    refreshTokenExpirationTimeMs : 604800000 # 7 days
 
 
 

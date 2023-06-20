@@ -19,9 +19,9 @@ CREATE  TABLE "public".users (
 	role        varchar(255)    ,
 	created_at           timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
 	updated_at           timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL  ,
-	CONSTRAINT users_pkey PRIMARY KEY ( user_id )
+	CONSTRAINT users_pkey PRIMARY KEY ( user_id ),
 -- 	CONSTRAINT users_email_key UNIQUE ( email ),
--- 	CONSTRAINT users_user_name_key UNIQUE ( user_name )
+	CONSTRAINT users_user_name_key UNIQUE ( user_name )
 );
 
 

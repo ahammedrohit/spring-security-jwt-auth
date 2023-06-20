@@ -116,8 +116,11 @@ public class JwtService {
     @Value("${jwt.accessToken.signInKey}")
     private String SECRET_KEY;
 
-    @Value("${jwt.accessToken.accessTokenExpirationTime}")
+    @Value("${jwt.accessToken.accessTokenExpirationTimeMs}")
     private Long ACCESS_TOKEN_EXPIRATION_TIME;
+
+    @Value("${jwt.accessToken.refreshTokenExpirationTimeMs}")
+    private Long REFRESH_TOKEN_EXPIRATION_TIME;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -143,20 +146,28 @@ public class JwtService {
     }
 
     public String generateToken(UserEntity userDetails) {
-
         HashMap<String, Object> claims = new HashMap<>();
         claims.put("name", userDetails.getUsername());
         claims.put("role", userDetails.getRole());
-        return generateToken(claims, userDetails);
+        return generateTokenWithClaims(claims, userDetails);
     }
 
-    public String generateToken(Map<String, Object> extraClaims, UserEntity userDetails) {
+    public String generateTokenWithClaims(Map<String, Object> extraClaims, UserEntity userDetails) {
+        return buildToken(extraClaims, userDetails, ACCESS_TOKEN_EXPIRATION_TIME);
 
+    }
+
+    public String generateRefreshToken(UserEntity userDetails) {
+        return buildToken(new HashMap<>(), userDetails, REFRESH_TOKEN_EXPIRATION_TIME);
+
+    }
+
+    private String buildToken(Map<String, Object> extraClaims, UserEntity userDetails, long expirationTime) {
         return Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_EXPIRATION_TIME)) // 10 hours
+                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(getSignInKey())
                 .compact();
     }
